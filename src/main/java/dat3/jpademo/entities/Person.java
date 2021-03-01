@@ -35,13 +35,13 @@ public class Person implements Serializable {
     @Column(name = "p_id")
     private Long p_id;
    
-    @Column(name = "name", length=50)
+    @Column(name = "name", length=50, nullable=false)
     private String name;
     @Column(name = "year")
     private int year;
     
     @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "address")
+    @JoinColumn(name = "a_id")
     private Address address;
 
     @OneToMany(mappedBy = "person",  cascade = CascadeType.PERSIST)
