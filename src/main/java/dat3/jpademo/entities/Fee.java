@@ -50,8 +50,6 @@ public class Fee implements Serializable {
         this.payDate = new Date();
     }
     
-       
-    
     public Long getId() {
         return id;
     }

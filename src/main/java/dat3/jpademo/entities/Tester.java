@@ -10,7 +10,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -37,17 +36,18 @@ public class Tester {
         Fee f2 = new Fee(200);
         Fee f3 = new Fee(300);
        
-        p1.AddFee(f1);
-        p1.AddFee(f3);
-        p2.AddFee(f2);
+        p1.addFee(f1);
+        p1.addFee(f3);
+        p2.addFee(f2);
         
         SwimStyle s1 = new SwimStyle("Crawl");
         SwimStyle s2 = new SwimStyle("ButterFly");
         SwimStyle s3 = new SwimStyle("Breast stroke");
         
-        p1.AddSwimStyle(s1);
-        p1.AddSwimStyle(s3);
-        p2.AddSwimStyle(s2);
+        p1.addSwimStyle(s1);
+        p1.addSwimStyle(s3);
+        p2.addSwimStyle(s2);
+        
                         
         em.getTransaction().begin();
             em.persist(p1);
@@ -56,8 +56,11 @@ public class Tester {
         
         
         em.getTransaction().begin();
-       //     p1.removeSwimStyle(s3);
+            em.remove(s3);
+            //p1.removeSwimStyle(s3);
         em.getTransaction().commit();
+        
+    
         
        
         System.out.println("p1: " + p1.getP_id()+ ", " + p1.getName());
@@ -104,8 +107,7 @@ public class Tester {
             System.out.println(p.getName() + ", " + p.getYear() + ", " + p.getSwimStyle());
         }
         
-        
-        
+        em.close();
         
         
        

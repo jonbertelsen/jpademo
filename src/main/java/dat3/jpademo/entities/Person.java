@@ -34,7 +34,7 @@ public class Person implements Serializable {
     
     @OneToOne(cascade = CascadeType.PERSIST)
     private Address address;
-
+    
     @OneToMany(mappedBy = "person",  cascade = CascadeType.PERSIST)
     private List<Fee> fees;
     
@@ -49,14 +49,14 @@ public class Person implements Serializable {
         return fees;
     }
 
-    public void AddFee(Fee fee) {
+    public void addFee(Fee fee) {
         this.fees.add(fee);
         if (fee != null){
             fee.setPerson(this);
         }
     }
     
-    public void AddSwimStyle(SwimStyle style){
+    public void addSwimStyle(SwimStyle style){
         if (style != null){
             this.styles.add(style);
             style.getPersons().add(this);
