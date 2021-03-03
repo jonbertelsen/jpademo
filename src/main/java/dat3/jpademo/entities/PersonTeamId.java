@@ -66,6 +66,13 @@ public class PersonTeamId implements Serializable {
         return (Objects.equals(this.p_id, other.p_id) && Objects.equals(this.t_id, other.t_id));
     }
 
+    @Override
+    public String toString() {
+        return "PersonTeamId{" + "p_id=" + p_id + ", t_id=" + t_id + '}';
+    }
+    
+    
+
     
     
     

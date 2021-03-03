@@ -36,12 +36,12 @@ public class PersonTeam implements Serializable {
     @EmbeddedId
     private PersonTeamId id;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @MapsId("p_id")
     @JoinColumn(name = "p_id")
     private Person person;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @MapsId("t_id")
     @JoinColumn(name = "t_id")
     private Team team;
@@ -110,6 +110,11 @@ public class PersonTeam implements Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "PersonTeam{" + "id=" + id + ", person=" + person + ", team=" + team + ", level=" + level + '}';
     }
     
     

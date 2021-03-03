@@ -62,8 +62,26 @@ public class Tester {
         em.getTransaction().commit();
         
         
+        
+        
+        PersonTeamId pt_id = new PersonTeamId(p1.getP_id(), t1.getT_id() );
+        PersonTeam pt_composite = em.find(PersonTeam.class, pt_id);
+        if (pt_composite != null){
+            System.out.println("Vi har fundet en sammensat nøgle med em.find() for: " + pt_composite.getPerson().getName());
+        } else {
+            System.out.println("Vi fandt desværre ikke noget!!!! På den sammensatte nøgle");
+        }
+        
+        
+        TypedQuery<PersonTeam> q_composite_key = em.createQuery("SELECT pt FROM PersonTeam pt where pt.person = :p1", PersonTeam.class);
+        q_composite_key.setParameter("p1", p1);
+        List<PersonTeam> q_composite_result = q_composite_key.getResultList();
+        for (PersonTeam pt: q_composite_result){
+            System.out.println("**** PersonTeam" + pt.getPerson().getName() + ": " + pt.getTeam().getName() + ". Level: " + pt.getLevel());
+        }
+        
         em.getTransaction().begin();
-            em.remove(s3);
+            //em.remove(s3);
             //p1.removeSwimStyle(s3);
         em.getTransaction().commit();
               
@@ -120,7 +138,7 @@ public class Tester {
         System.out.println("**** Flyt begynderhold for Jønke:");
         
          em.getTransaction().begin();
-            p1.removeTeam(t2);  // fjern begynderholdet
+            //p1.removeTeam(t2);  // fjern begynderholdet
         em.getTransaction().commit();
         
         for (Person p: persons){
