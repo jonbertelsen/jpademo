@@ -46,7 +46,7 @@ public class PersonTeam implements Serializable {
     @JoinColumn(name = "t_id")
     private Team team;
     
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     @Column(name = "level")
     private SwimmerLevel level;
 
