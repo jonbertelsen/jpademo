@@ -6,12 +6,14 @@
     <class>dat3.jpademo.entities.Address</class>
     <class>dat3.jpademo.entities.Fee</class>
     <class>dat3.jpademo.entities.SwimStyle</class>
+    <class>dat3.jpademo.entities.Team</class>
+    <class>dat3.jpademo.entities.PersonTeam</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/startcode?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="dev"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="ax2"/>
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
 </persistence>

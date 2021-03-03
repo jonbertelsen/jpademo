@@ -48,8 +48,15 @@ public class Tester {
         p1.addSwimStyle(s3);
         p2.addSwimStyle(s2);
         
-                        
+        Team t1 = new Team("Konkurrence");
+        Team t2 = new Team("Begyndere");
+        p1.addTeam(t1, PersonTeam.SwimmerLevel.HIGH);
+        p1.addTeam(t2, PersonTeam.SwimmerLevel.LOW);
+        p2.addTeam(t2, PersonTeam.SwimmerLevel.MEDIUM);
+        
         em.getTransaction().begin();
+            em.persist(t1);
+            em.persist(t2);
             em.persist(p1);
             em.persist(p2);
         em.getTransaction().commit();
@@ -59,10 +66,7 @@ public class Tester {
             em.remove(s3);
             //p1.removeSwimStyle(s3);
         em.getTransaction().commit();
-        
-    
-        
-       
+              
         System.out.println("p1: " + p1.getP_id()+ ", " + p1.getName());
         System.out.println("p2: " + p2.getP_id() + ", " + p2.getName());
         
@@ -96,6 +100,10 @@ public class Tester {
             for (SwimStyle ss: p.getStyles()){
                 System.out.println("---- Style: " + ss.getStyleName());
             }
+            System.out.println("Teams");
+            for (PersonTeam pt: p.getTeams()){
+                System.out.println("---- Team: " + pt.getTeam().getName() + ". Level: " + pt.getLevel());
+            }
         }
         
         System.out.println("**** Eksperimenter med JPQL");
@@ -106,6 +114,25 @@ public class Tester {
         for (PersonStyleDTO p: personList){
             System.out.println(p.getName() + ", " + p.getYear() + ", " + p.getSwimStyle());
         }
+        
+       
+        
+        System.out.println("**** Flyt begynderhold for Jønke:");
+        
+         em.getTransaction().begin();
+            p1.removeTeam(t2);  // fjern begynderholdet
+        em.getTransaction().commit();
+        
+        for (Person p: persons){
+            System.out.println("Navn: " + p.getName());
+            System.out.println("Teams");
+            for (PersonTeam pt: p.getTeams()){
+                System.out.println("---- Team: " + pt.getTeam().getName() + ". Level: " + pt.getLevel());
+            }
+        }
+        
+        
+        
         
         em.close();
         

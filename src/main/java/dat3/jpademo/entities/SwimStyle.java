@@ -8,28 +8,38 @@ package dat3.jpademo.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author jobe
  */
 @Entity
+@Table(name = "swimstyle")
 public class SwimStyle implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "s_id")
     private Long id;
+    
+    @Column(name = "style_name")
     private String styleName;
     
     @ManyToMany
-    @JoinColumn(name = "styles")
+    @JoinTable(
+        name = "link_person_swimstyle", 
+        joinColumns = @JoinColumn(name = "s_id"), 
+        inverseJoinColumns = @JoinColumn(name = "p_id"))
     private List<Person> persons;
 
     public SwimStyle() {
